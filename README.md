@@ -7,18 +7,15 @@ def selection_sort(arr):
                 min_idx = j
         arr[i], arr[min_idx] = arr[min_idx], arr[i]
     return arr
-
     def quick_sort(arr):
     if len(arr) <= 1:
         return arr
     
-    pivot = arr[len(arr) // 2]
-    left = [x for x in arr if x < pivot]
-    mid = [x for x in arr if x == pivot]
-    right = [x for x in arr if x > pivot]
+    pivot = arr[0]
+    left = [x for x in arr[1:] if x <= pivot]
+    right = [x for x in arr[1:] if x > pivot]
     
-    return quick_sort(left) + mid + quick_sort(right)
-
+    return quick_sort(left) + [pivot] + quick_sort(right)
     def insertion_sort(arr):
     for i in range(1, len(arr)):
         key = arr[i]
@@ -30,7 +27,6 @@ def selection_sort(arr):
         
         arr[j + 1] = key
     return arr
-
     def merge_sort(arr):
     if len(arr) <= 1:
         return arr
@@ -55,19 +51,14 @@ def merge(left, right):
     
     result.extend(left[i:])
     result.extend(right[j:])
-    
     return result
-
     def bubble_sort(arr):
     n = len(arr)
-    
     for i in range(n):
-        for j in range(0, n - i - 1):
+        for j in range(n - i - 1):
             if arr[j] > arr[j + 1]:
                 arr[j], arr[j + 1] = arr[j + 1], arr[j]
-    
     return arr
-
     def heapify(arr, n, i):
     largest = i
     left = 2*i + 1
@@ -86,12 +77,10 @@ def merge(left, right):
 def heap_sort(arr):
     n = len(arr)
     
-    # 建堆
     for i in range(n//2 - 1, -1, -1):
         heapify(arr, n, i)
     
-    # 排序
-    for i in range(n - 1, 0, -1):
+    for i in range(n-1, 0, -1):
         arr[0], arr[i] = arr[i], arr[0]
         heapify(arr, i, 0)
     
